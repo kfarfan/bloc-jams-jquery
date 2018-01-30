@@ -10,6 +10,15 @@ class Player {
     return this.soundObject.getDuration();
   }
 
+  prettyTime(timeInSeconds) {
+    var minutes = Math.floor(timeInSeconds / 60);
+    var seconds = Math.floor(timeInSeconds - minutes * 60);
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+    return minutes + ':' + seconds;
+  }
+
   getTime() {
     return this.soundObject.getTime();
   }
@@ -39,7 +48,7 @@ class Player {
   }
 
   skipTo (percent) {
-    if (this.playState !== 'playing') { return }
+    if (this.playState !== 'playing') { return; }
     this.soundObject.setTime( (percent / 100) * this.soundObject.getDuration() );
   }
 
@@ -47,6 +56,7 @@ class Player {
     this.volume = percent;
     this.soundObject.setVolume(percent);
   }
+
 }
 
 const player = new Player();
